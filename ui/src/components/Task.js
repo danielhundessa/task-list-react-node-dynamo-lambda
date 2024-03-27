@@ -8,7 +8,7 @@ import axios from "axios";
 import { API_URL } from "../utils";
 
 export const Task = ({ task, fetchTasks }) => {
-  const { id, name, completed } = task;
+  const { id, identity, name, completed } = task;
   const [isComplete, setIsComplete] = useState(completed);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -16,6 +16,7 @@ export const Task = ({ task, fetchTasks }) => {
     try {
       await axios.put(API_URL, {
         id,
+        identity,
         name,
         completed: !isComplete,
       });
@@ -43,7 +44,7 @@ export const Task = ({ task, fetchTasks }) => {
         })}
       >
         <Checkbox checked={isComplete} onChange={handleUpdateTaskCompletion} />
-        <Typography variant="h4">{name}</Typography>
+        <a href={name} target="blank"><Typography variant="h4">{identity}</Typography>Apply Now</a>
       </div>
       <div className="taskButtons">
         <Button variant="contained" onClick={() => setIsDialogOpen(true)}>

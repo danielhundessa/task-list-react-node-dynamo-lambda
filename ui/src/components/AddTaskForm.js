@@ -7,17 +7,20 @@ import { API_URL } from "../utils";
 
 export const AddTaskForm = ({ fetchTasks }) => {
   const [newTask, setNewTask] = useState("");
+  const [identity, setIdentity] = useState("");
 
   const addNewTask = async () => {
     try {
       await axios.post(API_URL, {
         name: newTask,
         completed: false,
+        identity: identity
       });
 
       await fetchTasks();
 
       setNewTask("");
+      setIdentity("");
     } catch (err) {
       console.log(err);
     }
@@ -25,13 +28,20 @@ export const AddTaskForm = ({ fetchTasks }) => {
 
   return (
     <div>
-      <Typography align="center" variant="h2" paddingTop={2} paddingBottom={2}>
-        My Task List
+      <Typography align="center" variant="h3" paddingTop={2} paddingBottom={2}>
+        Career Hunts remaining
       </Typography>
       <div className="addTaskForm">
         <TextField
           size="small"
-          label="Task"
+          label="Company and Position"
+          variant="outlined"
+          value={identity}
+          onChange={(e) => setIdentity(e.target.value)}
+        />
+        <TextField
+          size="small"
+          label="Link"
           variant="outlined"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
