@@ -13,7 +13,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const fetchTasks = async () => {
   const command = new ScanCommand({
-    ExpressionAttributeNames: { "#name": "name", "#identity":"identity" },
+    ExpressionAttributeNames: { "#name": "name" },
     ProjectionExpression: "id, #name, #identity, completed",
     TableName: "Tasks",
   });
@@ -23,15 +23,15 @@ export const fetchTasks = async () => {
   return response;
 };
 
-export const createTasks = async ({ name, identity, completed }) => {
+export const createTasks = async ({ name, id, completed }) => {
   const uuid = crypto.randomUUID();
   const command = new PutCommand({
     TableName: "Tasks",
     Item: {
-      id: uuid,
+      id: {id},
       name,
       identity,
-      completed,
+      completed
     },
   });
 

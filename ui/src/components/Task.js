@@ -44,7 +44,8 @@ export const Task = ({ task, fetchTasks }) => {
         })}
       >
         <Checkbox checked={isComplete} onChange={handleUpdateTaskCompletion} />
-        <a href={name} target="blank"><Typography variant="h4">{identity}</Typography>Apply Now</a>
+        <a href={name} target="blank"><Typography variant="h3"></Typography>{name} Apply Now</a>
+        
       </div>
       <div className="taskButtons">
         <Button variant="contained" onClick={() => setIsDialogOpen(true)}>
